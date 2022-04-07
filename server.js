@@ -5,13 +5,19 @@ const server = http.createServer((req, res) => {
   const { url, method } = req;
 
   if (url === "/") {
-    res.write("<html>");
-    res.write("<head><title>Enter message</title></head>");
-    res.write(
-      "<body><form action='/message' method='POST'><input type='text' name='message'><button type='submit'>Send</button></body>"
-    );
-    res.write("</html>");
-    return res.end();
+    return fs.readFile("message.txt", { encoding: "utf-8" }, (err, data) => {
+      console.log("data: ", data);
+      res.write("<html>");
+      res.write("<head><title>Enter message</title></head>");
+      res.write("<body>");
+      res.write(`<h1>${data}</h1>`);
+      res.write(
+        "<form action='/message' method='POST'><input type='text' name='message'><button type='submit'>Send</button>"
+      );
+      res.write("</body>");
+      res.write("</html>");
+      return res.end();
+    });
   } else if (url === "/message" && method === "POST") {
     const body = [];
     req.on("data", (chunk) => {

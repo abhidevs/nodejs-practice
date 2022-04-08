@@ -1,0 +1,16 @@
+{
+  "name": "kickstarting-nodejs",
+  "version": "1.0.0",
+  "description": "Guide to npm scripts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "start-server": "node server.js"
+  },
+  "author": "Abhik Das",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

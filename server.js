@@ -3,21 +3,24 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const shopRoute = require("./routes/shop");
-const adminRoute = require("./routes/admin");
-const contactUsRoute = require("./routes/contactUs");
+const errorController = require("./controllers/error");
 
 const app = express();
+
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
+const contactUsRoutes = require("./routes/contactUs");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(shopRoute);
-app.use("/admin", adminRoute);
-app.use("/contactus", contactUsRoute);
+app.use("/admin", adminRoutes.routes);
+app.use("/contactus", contactUsRoutes);
+app.use(shopRoutes);
 
-app.use("/", (req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
-});
+app.use(errorController.get404);
 
-app.listen(4000, () => console.log("Server running at port 4000"));
+app.listen(3000);

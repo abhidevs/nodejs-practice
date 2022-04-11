@@ -1,19 +1,23 @@
 {
-  "name": "simple-group-chat-website",
+  "name": "expressjs-practice",
   "version": "1.0.0",
-  "description": "Simple group chat website",
+  "description": "ExpressJs Practice",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "start-server": "node server.js"
   },
   "author": "Abhik Das",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.0",
-    "express": "^4.17.3"
-  },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^1.18.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "pug": "^2.0.3"
   }
 }

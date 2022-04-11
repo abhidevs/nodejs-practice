@@ -1,22 +1,23 @@
+const path = require("path");
+
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+const shopRoute = require("./routes/shop");
+const adminRoute = require("./routes/admin");
+const contactUsRoute = require("./routes/contactUs");
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/shop", shopRoutes);
-app.use("/admin", adminRoutes);
-
-app.get("/", (req, res, next) => {
-  res.send("<h1>Hello from Express</h1>");
-});
+app.use(shopRoute);
+app.use("/admin", adminRoute);
+app.use("/contactus", contactUsRoute);
 
 app.use("/", (req, res, next) => {
-  res.status(404).send("<h1>Page not found</h1>");
+  res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
 });
 
-app.listen(4000, console.log("Server running on port 4000"));
+app.listen(4000, () => console.log("Server running at port 4000"));
